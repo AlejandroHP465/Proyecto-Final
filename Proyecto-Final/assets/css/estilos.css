@@ -1,0 +1,17 @@
+#modal-pago {
+    z-index: 1000;
+}
+
+#modal-pago .bg-white {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0.8;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
