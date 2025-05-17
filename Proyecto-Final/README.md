@@ -48,7 +48,7 @@ Este proyecto es una tienda de videojuegos en línea desarrollada como proyecto 
    - Coloca la carpeta del proyecto en el directorio `htdocs` de XAMPP.
 
 4. **Accede a la aplicación:**
-   - Abre tu navegador y navega a `http://localhost/PRW_HigueroPazAlejandro/Proyecto-Final/Proyecto-Final/views/index.php`
+   - Abre tu navegador y navega a `http://localhost/Proyecto-Final/Proyecto-Final/views/index.php`
 
 ---
 
