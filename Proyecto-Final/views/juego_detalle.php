@@ -207,19 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($juego['nombre']); ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // Script para rellenar las estrellas dinámicamente
-        function rellenarEstrellas(valor) {
-            const estrellas = document.querySelectorAll('.estrella');
-            estrellas.forEach((estrella, index) => {
-                if (index < valor) {
-                    estrella.classList.add('text-yellow-500');
-                } else {
-                    estrella.classList.remove('text-yellow-500');
-                }
-            });
-        }
-    </script>
+
 </head>
 
 <body class="bg-gray-100 min-h-screen flex flex-col items-center">
@@ -227,9 +215,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
         <div class="container mx-auto px-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold"><?php echo htmlspecialchars($juego['nombre']); ?></h1>
             <div class="flex space-x-4">
-                <a href="index.php" class="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700">Volver</a>
+                <a href="index.php" class="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700">
+                    <?php echo $textos[$idioma]['volver'] ?? 'Volver'; ?>
+                </a>
                 <?php if (isset($_SESSION['cliente_id']) && $_SESSION['cliente_id'] !== 1): ?>
-                    <a href="../views/carrito.php" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Ver carrito</a>
+                    <a href="../views/carrito.php" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">
+                        <?php echo $textos[$idioma]['ver_carrito'] ?? 'Ver carrito'; ?>
+                    </a>
                 <?php endif; ?>
             </div>
         </div>
@@ -254,8 +246,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
                     <h2 class="text-3xl font-bold text-gray-800"><?php echo htmlspecialchars($juego['nombre']); ?></h2>
                     <p class="text-gray-600 mt-4"><?php echo htmlspecialchars($juego['descripcion']); ?></p>
                     <?php if (isset($_SESSION['cliente_id'])): ?>
-                    <p class="text-xl font-semibold text-blue-600 mt-4">Precio: <?php echo htmlspecialchars($juego['precio']); ?>€</p>
-                    <p class="text-lg mt-4">Valoración promedio: <?php echo number_format($valoracionPromedio, 1); ?>/5</p>
+                    <p class="text-xl font-semibold text-blue-600 mt-4"><?php echo $textos[$idioma]['precio'] ?> <?php echo htmlspecialchars($juego['precio']); ?>€</p>
+                    <p class="text-lg mt-4"><?php echo $textos[$idioma]['Valoración_promedio'] ?> <?php echo number_format($valoracionPromedio, 1); ?>/5</p>
                     <?php endif; ?>
                     <!-- Mostrar géneros -->
                     <?php if (!empty($generos)): ?>
@@ -314,7 +306,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
                             <input type="hidden" name="precio" value="<?php echo htmlspecialchars($juego['precio']); ?>">
                             <input type="hidden" name="Foto" value="<?php echo htmlspecialchars($juego['Foto']); ?>">
                             <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
-                                🛒 Añadir al carrito
+                                🛒 <?php echo $textos[$idioma]['añadir_carrito'] ; ?>
                             </button>
                         </form>
                         <?php if (isset($_SESSION['cliente_id']) && $_SESSION['cliente_id'] !== 1): ?>
@@ -322,7 +314,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
                             <input type="hidden" name="accion" value="favorito">
                             <input type="hidden" name="producto_id" value="<?php echo htmlspecialchars($juego['producto_id']); ?>">
                             <button type="submit" class="<?php echo $esFavorito ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-white hover:bg-red-600 text-red-500 hover:text-white border border-red-500'; ?> py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
-                                ❤️ <?php echo $esFavorito ? 'Eliminar de Favoritos' : 'Añadir a Favoritos'; ?>
+                                ❤️ <?php echo $esFavorito ? ($textos[$idioma]['eliminar_favorito'] ) : ($textos[$idioma]['añadir_favorito'] ); ?>
                             </button>
                         </form>
                         <?php endif; ?>
@@ -335,20 +327,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
         <!-- Opciones de administración para el usuario con cliente_id = 1 -->
         <?php if (isset($_SESSION['cliente_id']) && $_SESSION['cliente_id'] === 1): ?>
             <div class="mt-8">
-                <h3 class="text-2xl font-bold text-gray-800">Opciones de administración</h3>
+                <h3 class="text-2xl font-bold text-gray-800">
+                    <?php echo $textos[$idioma]['opciones_admin'] ; ?>
+                </h3>
                 <div class="flex space-x-4 mt-4">
                     <!-- Botón para editar -->
                     <form action="" method="POST">
                         <input type="hidden" name="accion" value="editar">
                         <button type="submit" class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2">
-                            Editar juego
+                            <?php echo $textos[$idioma]['editar_juego'] ; ?>
                         </button>
                     </form>
                     <!-- Botón para eliminar -->
                     <form action="" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este juego?');">
                         <input type="hidden" name="accion" value="eliminar">
                         <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
-                            Eliminar juego
+                            <?php echo $textos[$idioma]['eliminar_juego'] ; ?>
                         </button>
                     </form>
                 </div>
@@ -358,7 +352,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
         <!-- Sección de valoración -->
         <?php if (!isset($_SESSION['cliente_id']) || $_SESSION['cliente_id'] !== 1): ?>
         <div class="mt-8">
-            <h3 class="text-2xl font-bold text-gray-800">Valora este juego</h3>
+            <h3 class="text-2xl font-bold text-gray-800">
+                <?php echo $textos[$idioma]['valora_juego'] ; ?>
+            </h3>
             <?php if (isset($_SESSION['cliente_id'])): ?>
                 <form action="" method="POST" class="flex items-center mt-4">
                     <input type="hidden" name="accion" value="valorar">
@@ -373,11 +369,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
                         <?php endfor; ?>
                     </div>
                     <button type="submit" class="ml-4 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                        Enviar valoración
+                        <?php echo $textos[$idioma]['enviar_valoracion'] ; ?>
                     </button>
                 </form>
             <?php else: ?>
-                <p class="text-gray-600 mt-4">Inicia sesión para valorar este juego.</p>
+                <p class="text-gray-600 mt-4">
+                    <?php echo $textos[$idioma]['inicia_valorar'] ; ?>
+                </p>
             <?php endif; ?>
         </div>
         <?php endif; ?>
@@ -385,10 +383,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
         <!-- Sección de reseñas -->
         <?php if (isset($_SESSION['cliente_id'])): ?>
         <div class="mt-8">
-            <h3 class="text-2xl font-bold text-gray-800">Reseñas</h3>
+            <h3 class="text-2xl font-bold text-gray-800">
+                <?php echo $textos[$idioma]['resenas'] ; ?>
+            </h3>
             <div class="bg-gray-50 rounded-lg shadow-md p-4 mt-4">
                 <?php if (empty($resena)): ?>
-                    <p class="text-gray-600 italic">No hay reseñas aún. ¡Sé el primero en dejar una resena!</p>
+                    <p class="text-gray-600 italic">
+                        <?php echo $textos[$idioma]['no_resenas'] ; ?>
+                    </p>
                 <?php else: ?>
                     <?php foreach ($resena as $resena): ?>
                         <div class="mb-4">
@@ -404,20 +406,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
         <!-- Formulario para agregar un resena -->
         <?php if (!isset($_SESSION['cliente_id']) || $_SESSION['cliente_id'] !== 1): ?>
         <div class="mt-8">
-            <h3 class="text-2xl font-bold text-gray-800">Deja tu reseña</h3>
+            <h3 class="text-2xl font-bold text-gray-800">
+                <?php echo $textos[$idioma]['deja_resena'] ; ?>
+            </h3>
             <?php if (isset($_SESSION['cliente_id'])): ?>
                 <form action="" method="POST" class="bg-white rounded-lg shadow-md p-6 mt-4">
                     <input type="hidden" name="accion" value="comentar">
                     <div class="mb-4">
-                        <label for="resena" class="block text-sm font-medium text-gray-700">reseña:</label>
+                        <label for="resena" class="block text-sm font-medium text-gray-700">
+                            <?php echo $textos[$idioma]['resena'] ; ?>
+                        </label>
                         <textarea id="resena" name="resena" rows="4" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
                     </div>
                     <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                        Enviar reseña
+                        <?php echo $textos[$idioma]['enviar_resena'] ; ?>
                     </button>
                 </form>
             <?php else: ?>
-                <p class="text-gray-600 mt-4">Inicia sesión para dejar una reseña este juego.</p>
+                <p class="text-gray-600 mt-4">
+                    <?php echo $textos[$idioma]['inicia_resena'] ; ?>
+                </p>
             <?php endif; ?>
         </div>
         <?php endif; ?>

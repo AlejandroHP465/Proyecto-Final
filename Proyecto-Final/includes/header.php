@@ -43,7 +43,7 @@
 
             <!-- Botones de sesión -->
             <?php if (isset($_SESSION['email'])): ?>
-                <form method="POST">
+                <form method="POST" action="../views/index.php" style="display:inline;">
                     <button type="submit" name="cerrar" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">
                         <?php echo htmlspecialchars($textos[$idioma]['cerrar_sesion']); ?>
                     </button>
@@ -71,46 +71,3 @@
         </div>
     </div>
 </header>
-
-<script>
-    // Asegurarse de que el DOM esté completamente cargado
-    document.addEventListener('DOMContentLoaded', () => {
-        // Alternar el menú de ajustes
-        const settingsButton = document.getElementById('settingsButton');
-        const settingsMenu = document.getElementById('settingsMenu');
-
-        if (settingsButton && settingsMenu) {
-            settingsButton.addEventListener('click', () => {
-                settingsMenu.classList.toggle('hidden');
-            });
-
-            // Cerrar el menú si se hace clic fuera de él
-            document.addEventListener('click', (event) => {
-                if (!settingsButton.contains(event.target) && !settingsMenu.contains(event.target)) {
-                    settingsMenu.classList.add('hidden');
-                }
-            });
-        }
-    });
-
-    // Alternar modo oscuro
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const darkModeText = document.getElementById('darkModeText');
-    const body = document.body;
-
-    if (darkModeToggle) {
-        darkModeToggle.addEventListener('click', () => {
-            const isDarkMode = body.classList.toggle('dark');
-            darkModeText.textContent = isDarkMode
-                ? '<?php echo htmlspecialchars($textos[$idioma]['desactivar_modo_oscuro']); ?>'
-                : '<?php echo htmlspecialchars($textos[$idioma]['activar_modo_oscuro']); ?>';
-            localStorage.setItem('darkMode', isDarkMode);
-        });
-
-        // Aplicar modo oscuro si está activado
-        if (localStorage.getItem('darkMode') === 'true') {
-            body.classList.add('dark');
-            darkModeText.textContent = '<?php echo htmlspecialchars($textos[$idioma]['desactivar_modo_oscuro']); ?>';
-        }
-    }
-</script>

@@ -34,7 +34,7 @@ unset($_SESSION['error']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Usuario</title>
+    <title><?php echo $textos[$idioma]['perfil_usuario'] ; ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -51,23 +51,31 @@ unset($_SESSION['error']);
 
         <!-- Título principal -->
         <?php if ($usuario['cliente_id'] === 1): ?>
-            <h1 class="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8">Panel de Administrador</h1>
+            <h1 class="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8">
+                <?php echo $textos[$idioma]['acciones_admin'] ; ?>
+            </h1>
         <?php else: ?>
-            <h1 class="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8">Perfil de Usuario</h1>
+            <h1 class="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8">
+                <?php echo $textos[$idioma]['perfil_usuario'] ; ?>
+            </h1>
         <?php endif; ?>
 
         <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
             <!-- Información personal -->
             <section class="mb-8">
-                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Información Personal</h2>
-                <p class="text-gray-700 dark:text-gray-300"><strong>Nombre:</strong> <?php echo htmlspecialchars($usuario['nombre']); ?></p>
-                <p class="text-gray-700 dark:text-gray-300"><strong>Email:</strong> <?php echo htmlspecialchars($usuario['email']); ?></p>
+                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+                    <?php echo $textos[$idioma]['informacion_personal'] ?? 'Información Personal'; ?>
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300"><strong><?php echo $textos[$idioma]['nombre'] ; ?>:</strong> <?php echo htmlspecialchars($usuario['nombre']); ?></p>
+                <p class="text-gray-700 dark:text-gray-300"><strong><?php echo $textos[$idioma]['correo'] ; ?>:</strong> <?php echo htmlspecialchars($usuario['email']); ?></p>
             </section>
 
             <?php if ($usuario['cliente_id'] !== 1): ?>
             <!-- Lista de favoritos -->
             <section class="mb-8">
-                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Lista de Favoritos</h2>
+                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+                    <?php echo $textos[$idioma]['favoritos'] ?? 'Lista de Favoritos'; ?>
+                </h2>
                 <ul class="list-disc list-inside space-y-2">
                     <?php
                     $statement = $pdo->prepare('SELECT p.nombre FROM favoritos f JOIN producto p ON f.producto_id = p.producto_id WHERE f.cliente_id = :cliente_id');
@@ -79,7 +87,7 @@ unset($_SESSION['error']);
                             echo '<li class="text-gray-700 dark:text-gray-300">' . htmlspecialchars($favorito['nombre']) . '</li>';
                         }
                     } else {
-                        echo '<li class="text-gray-500 dark:text-gray-400 italic">No tienes productos en tu lista de favoritos.</li>';
+                        echo '<li class="text-gray-500 dark:text-gray-400 italic">' . ($textos[$idioma]['no_favoritos'] ) . '</li>';
                     }
                     ?>
                 </ul>
@@ -87,7 +95,9 @@ unset($_SESSION['error']);
 
             <!-- Reseñas -->
             <section class="mb-8">
-                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Reseñas</h2>
+                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+                    <?php echo $textos[$idioma]['resenas'] ?? 'Reseñas'; ?>
+                </h2>
                 <ul class="list-disc list-inside space-y-2">
                     <?php
                     $statement = $pdo->prepare('SELECT c.resena, p.nombre AS producto FROM resena c JOIN producto p ON c.producto_id = p.producto_id WHERE c.cliente_id = :cliente_id');
@@ -99,7 +109,7 @@ unset($_SESSION['error']);
                             echo '<li class="text-gray-700 dark:text-gray-300"><strong>' . htmlspecialchars($resena['producto']) . ':</strong> ' . htmlspecialchars($resena['resena']) . '</li>';
                         }
                     } else {
-                        echo '<li class="text-gray-500 dark:text-gray-400 italic">No has realizado reseñas.</li>';
+                        echo '<li class="text-gray-500 dark:text-gray-400 italic">' . ($textos[$idioma]['no_resenas'] ) . '</li>';
                     }
                     ?>
                 </ul>
@@ -107,13 +117,15 @@ unset($_SESSION['error']);
             <?php else: ?>
             <!-- Panel de Administración -->
             <section class="mb-8">
-                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Acciones de Administrador</h2>
+                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+                    <?php echo $textos[$idioma]['acciones_admin'] ; ?>
+                </h2>
                 <div class="flex flex-col space-y-4">
                     <a href="insertar_juego.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded text-center">
-                        ➕ Insertar Nuevo Juego
+                        ➕ <?php echo $textos[$idioma]['insertar_juego'] ; ?>
                     </a>
                     <a href="index.php" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-center">
-                        🎮 Gestionar Juegos
+                        🎮 <?php echo $textos[$idioma]['gestionar_juegos'] ; ?>
                     </a>
                 </div>
             </section>
@@ -122,10 +134,10 @@ unset($_SESSION['error']);
             <!-- Botón para eliminar el usuario -->
             <?php if ($usuario['cliente_id'] !== 1): ?>
             <section class="mt-8">
-                <form method="POST" action="eliminar_usuario.php" onsubmit="return confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer y perderás todos tus datos, incluyendo el historial de compras, reseñas y favoritos.');">
+                <form method="POST" action="eliminar_usuario.php" onsubmit="return confirm('<?php echo $textos[$idioma]['confirmar_eliminar'] ?? '¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer y perderás todos tus datos, incluyendo el historial de compras, reseñas y favoritos.'; ?>');">
                     <input type="hidden" name="cliente_id" value="<?php echo htmlspecialchars($usuario['cliente_id']); ?>">
                     <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">
-                        🗑️ Eliminar cuenta
+                        🗑️ <?php echo $textos[$idioma]['eliminar_cuenta'] ; ?>
                     </button>
                 </form>
             </section>
@@ -134,7 +146,7 @@ unset($_SESSION['error']);
             <!-- Botón para volver atrás -->
             <div class="mt-8 text-center">
                 <a href="javascript:history.back()" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
-                    ← Volver atrás
+                    ← <?php echo $textos[$idioma]['volver'] ; ?>
                 </a>
             </div>
         </div>

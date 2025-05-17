@@ -203,7 +203,7 @@ INSERT INTO producto (nombre, descripcion, precio, Foto) VALUES
 ('A Plague Tale: Requiem', 'Aventura narrativa en la Francia de la peste', 39.99, 'https://images.launchbox-app.com//2d8b0ed0-9275-4445-ae12-83a4f5dbb49a.jpg'),
 ('Sifu', 'Beat ’em up con sistema de envejecimiento y kung-fu', 29.99, 'https://images.launchbox-app.com//dca3890f-a7de-4702-b1ab-2d551c4797ca.jpg'),
 ('Tears of the Kingdom', 'Continuación de Breath of the Wild con nuevas mecánicas', 59.99, 'https://images.launchbox-app.com//0ba7f44f-739e-4aa1-b52a-c7423fff3d1f.jpg'),
-('Pikmin 4', 'Estrategia en tiempo real con simpáticos pikmins', 49.99, 'https://images.launchbox-app.com//0ba7f44f-739e-4aa1-b52a-c7423fff3d1f.jpg'),
+('Pikmin 4', 'Estrategia en tiempo real con simpáticos pikmins', 49.99, 'https://images.launchbox-app.com//82147c35-aca4-4912-bb1f-0b050b252f38.png'),
 ('Mario + Rabbids Sparks of Hope', 'Estrategia táctica con personajes de Nintendo y Rabbids', 49.99, 'https://images.launchbox-app.com//3ff77894-3b20-4cb6-b904-5667a9341518.jpg'),
 ('Bayonetta 3', 'Hack ’n’ slash frenético con bruja poderosa', 59.99, 'https://images.launchbox-app.com//863d32b8-382b-49a1-9d99-0ef693362bad.jpg'),
 ('Animal Crossing: New Horizons', 'Vida isleña y recolección en paraíso tranquilo', 59.99, 'https://images.launchbox-app.com//40b87e08-ac65-42e6-9fa6-69c091dc3505.png'),

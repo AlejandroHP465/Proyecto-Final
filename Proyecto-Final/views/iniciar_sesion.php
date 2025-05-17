@@ -127,13 +127,7 @@ include '../includes/idioma.php'; // Incluir el archivo de idioma
         ?>
     </div>
 
-    <script>
-        // Aplicar modo oscuro si está activado
-        const body = document.getElementById('body');
-        if (localStorage.getItem('darkMode') === 'true') {
-            body.classList.add('dark-mode');
-        }
-    </script>
+
 </body>
 
 </html>

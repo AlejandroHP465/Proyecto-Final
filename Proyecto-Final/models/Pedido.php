@@ -27,7 +27,7 @@ class Pedido
             $pdo->beginTransaction();
 
             // Insertar el pedido
-            $query = "INSERT INTO pedidos (cliente_id, fecha) VALUES (:cliente_id, NOW())";
+            $query = "INSERT INTO pedido (cliente_id, fecha_pedido) VALUES (:cliente_id, NOW())";
             $statement = $pdo->prepare($query);
             $statement->bindParam(':cliente_id', $clienteId);
             $statement->execute();
@@ -35,7 +35,7 @@ class Pedido
             $pedidoId = $pdo->lastInsertId();
 
             // Insertar los productos del pedido
-            $query = "INSERT INTO pedido_productos (pedido_id, producto_id, cantidad, precio) VALUES (:pedido_id, :producto_id, :cantidad, :precio)";
+            $query = "INSERT INTO detalles_pedido (pedido_id, producto_id, cantidad, precio_unitario) VALUES (:pedido_id, :producto_id, :cantidad, :precio)";
             $statement = $pdo->prepare($query);
 
             foreach ($productos as $productoId => $producto) {

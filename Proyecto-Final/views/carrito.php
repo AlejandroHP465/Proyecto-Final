@@ -3,6 +3,7 @@ session_name("Tienda");
 session_start();
 include '../includes/idioma.php'; // Incluir el archivo de idioma
 include '../includes/connect.php';
+include '../models/Pedido.php'; // Incluir la clase Pedido
 
 // Inicializar carrito si no existe
 if (!isset($_SESSION['carrito'])) {
@@ -81,45 +82,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
 
-            $pdo->beginTransaction();
-
-            // Calcular el total del carrito
-            $totalCarrito = 0;
-            foreach ($carrito as $item) {
-                $totalCarrito += $item['precio'] * $item['cantidad'];
-            }
-
-            // Insertar el pedido en la base de datos
-            $statement = $pdo->prepare('INSERT INTO pedido (cliente_id, fecha_pedido, total, estado) VALUES (:id, :fecha, :total, :estado)');
-            $statement->execute([
-                'id' => $_SESSION['cliente_id'],
-                'fecha' => date('Y-m-d H:i:s'),
-                'total' => $totalCarrito,
-                'estado' => 'pendiente'
-            ]);
-            $pedidoId = $pdo->lastInsertId();
-
-            // Insertar los detalles del pedido
-            $statement = $pdo->prepare('INSERT INTO detalles_pedido (pedido_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (:pedido_id, :producto_id, :cantidad, :precio, :subtotal)');
+            // Adaptar el array de productos al formato esperado por Pedido::crearPedido
+            $productosPedido = [];
             foreach ($carrito as $productoId => $item) {
-                $statement->execute([
-                    'pedido_id' => $pedidoId,
-                    'producto_id' => $productoId,
+                $productosPedido[$productoId] = [
                     'cantidad' => $item['cantidad'],
-                    'precio' => $item['precio'],
-                    'subtotal' => $item['cantidad'] * $item['precio']
-                ]);
+                    'precio' => $item['precio']
+                ];
             }
 
-            $pdo->commit();
+            // Crear el pedido usando la clase Pedido
+            $pedidoId = Pedido::crearPedido($pdo, $_SESSION['cliente_id'], $productosPedido);
 
             // Vaciar el carrito
             $_SESSION['carrito'] = [];
             $carrito = [];
 
             echo '<h2 class="text-green-600 text-center">Pedido realizado correctamente</h2>';
-        } catch (PDOException $e) {
-            $pdo->rollBack();
+        } catch (Exception $e) {
             echo '<div class="text-red-500 text-center">Error al procesar el pedido: ' . $e->getMessage() . '</div>';
         }
     }
@@ -136,45 +116,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo '<div class="text-red-500 text-center">Por favor, completa todos los campos.</div>';
         } else {
             try {
-                $pdo->beginTransaction();
-
-                // Calcular el total del carrito
-                $totalCarrito = 0;
-                foreach ($carrito as $item) {
-                    $totalCarrito += $item['precio'] * $item['cantidad'];
+                if (empty($carrito)) {
+                    header('Location: carrito.php');
+                    exit;
                 }
 
-                // Insertar el pedido en la base de datos
-                $statement = $pdo->prepare('INSERT INTO pedido (cliente_id, fecha_pedido, total, estado) VALUES (:id, :fecha, :total, :estado)');
-                $statement->execute([
-                    'id' => $_SESSION['cliente_id'],
-                    'fecha' => date('Y-m-d H:i:s'),
-                    'total' => $totalCarrito,
-                    'estado' => 'pendiente'
-                ]);
-                $pedidoId = $pdo->lastInsertId();
-
-                // Insertar los detalles del pedido
-                $statement = $pdo->prepare('INSERT INTO detalles_pedido (pedido_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (:pedido_id, :producto_id, :cantidad, :precio, :subtotal)');
+                // Adaptar el array de productos al formato esperado por Pedido::crearPedido
+                $productosPedido = [];
                 foreach ($carrito as $productoId => $item) {
-                    $statement->execute([
-                        'pedido_id' => $pedidoId,
-                        'producto_id' => $productoId,
+                    $productosPedido[$productoId] = [
                         'cantidad' => $item['cantidad'],
-                        'precio' => $item['precio'],
-                        'subtotal' => $item['cantidad'] * $item['precio']
-                    ]);
+                        'precio' => $item['precio']
+                    ];
                 }
 
-                $pdo->commit();
+                // Crear el pedido usando la clase Pedido
+                $pedidoId = Pedido::crearPedido($pdo, $_SESSION['cliente_id'], $productosPedido);
 
                 // Vaciar el carrito
                 $_SESSION['carrito'] = [];
                 $carrito = [];
 
                 echo '<h2 class="text-green-600 text-center">Pago realizado correctamente. ¡Gracias por tu compra!</h2>';
-            } catch (PDOException $e) {
-                $pdo->rollBack();
+            } catch (Exception $e) {
                 echo '<div class="text-red-500 text-center">Error al procesar el pago: ' . $e->getMessage() . '</div>';
             }
         }
