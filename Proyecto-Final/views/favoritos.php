@@ -1,4 +1,3 @@
-<!-- filepath: c:\xampp\htdocs\Proyecto-Final\views\favoritos.php -->
 <?php
 session_name("Tienda");
 session_start();

@@ -96,19 +96,6 @@ include '../includes/idioma.php'; // Incluir el archivo de idioma
                     $_SESSION['email'] = $cliente['email'];
                     $_SESSION['usuario'] = $cliente['nombre'];
 
-                    // Cargar el carrito del usuario desde la base de datos
-                    $statement = $pdo->prepare('SELECT producto_id, cantidad FROM carrito WHERE cliente_id = :cliente_id');
-                    $statement->execute(['cliente_id' => $cliente['cliente_id']]);
-                    $carrito = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-                    // Inicializar el carrito en la sesión
-                    $_SESSION['carrito'] = [];
-                    foreach ($carrito as $item) {
-                        $_SESSION['carrito'][$item['producto_id']] = [
-                            'cantidad' => $item['cantidad']
-                        ];
-                    }
-
                     header("Location: index.php");
                     exit();
                 } else {

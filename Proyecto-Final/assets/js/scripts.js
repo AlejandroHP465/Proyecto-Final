@@ -101,6 +101,34 @@ function cerrarModal() {
     }
 }
 
+// Validación del formulario de pago
+document.addEventListener('DOMContentLoaded', function() {
+    const pagoForm = document.querySelector('#modal-pago form');
+    if (pagoForm) {
+        pagoForm.addEventListener('submit', function(e) {
+            const numTarjeta = pagoForm.numero_tarjeta.value;
+            const cvv = pagoForm.cvv.value;
+            const fecha = pagoForm.fecha_expiracion.value;
+
+            if (!/^\d{16}$/.test(numTarjeta)) {
+                alert('El número de tarjeta debe tener 16 dígitos numéricos.');
+                e.preventDefault();
+                return false;
+            }
+            if (!/^\d{3}$/.test(cvv)) {
+                alert('El CVV debe tener 3 dígitos numéricos.');
+                e.preventDefault();
+                return false;
+            }
+            if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(fecha)) {
+                alert('La fecha de expiración debe tener el formato MM/AA.');
+                e.preventDefault();
+                return false;
+            }
+        });
+    }
+});
+
 // Paginación (solo si usas .product y #paginacion)
 document.addEventListener('DOMContentLoaded', function() {
     const productos = Array.from(document.querySelectorAll('.product'));

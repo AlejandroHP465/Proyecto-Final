@@ -27,7 +27,7 @@ CREATE TABLE producto (
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     precio DECIMAL(10, 2) NOT NULL,
-Foto text
+    Foto text
 );
 
 -- Tabla de Pedidos
@@ -40,14 +40,6 @@ CREATE TABLE pedido (
     FOREIGN KEY (cliente_id) REFERENCES clientes(cliente_id)
 );
 
-CREATE TABLE carrito (
-    cliente_id INT NOT NULL,
-    producto_id INT NOT NULL,
-    cantidad INT NOT NULL DEFAULT 1,
-    PRIMARY KEY (cliente_id, producto_id),
-    FOREIGN KEY (cliente_id) REFERENCES clientes(cliente_id) ON DELETE CASCADE,
-    FOREIGN KEY (producto_id) REFERENCES producto(producto_id) ON DELETE CASCADE
-);
 
 
 -- Tabla de Detalles de Pedido

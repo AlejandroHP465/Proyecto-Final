@@ -287,8 +287,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
                                         'PC' => '💻',
                                         'PlayStation' => '🎮',
                                         'Xbox' => '🎮',
-                                        'Nintendo Switch' => '🎮',
-                                        'Mobile' => '📱'
+                                        'Nintendo Switch' => '🎮'
                                     ];
                                     echo isset($iconos[$plataforma['nombre']]) ? $iconos[$plataforma['nombre']] . ' ' : '';
                                     echo htmlspecialchars($plataforma['nombre']); 
@@ -298,7 +297,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
                         </div>
                     </div>
                     <?php endif; ?>
-                    <?php if (!isset($_SESSION['cliente_id']) || $_SESSION['cliente_id'] !== 1): ?>
+                    <?php if (isset($_SESSION['cliente_id']) && $_SESSION['cliente_id'] !== 1): ?>
                         <form action="" method="POST" class="mt-4">
                             <input type="hidden" name="accion" value="añadir">
                             <input type="hidden" name="producto_id" value="<?php echo htmlspecialchars($juego['producto_id']); ?>">

@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fechaExpiracion = $_POST['fecha_expiracion'];
         $cvv = $_POST['cvv'];
 
-        // Validar los datos de la tarjeta (puedes agregar más validaciones según sea necesario)
+        // Validar los datos de la tarjeta 
         if (empty($nombreTarjeta) || empty($numeroTarjeta) || empty($fechaExpiracion) || empty($cvv)) {
             echo '<div class="text-red-500 text-center">Por favor, completa todos los campos.</div>';
         } else {
@@ -247,19 +247,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="mb-4">
                             <label for="numero-tarjeta" class="block text-sm font-medium text-gray-700">Número de tarjeta</label>
-                            <input type="text" id="numero-tarjeta" name="numero_tarjeta" maxlength="16" 
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            <input type="text" id="numero-tarjeta" name="numero_tarjeta" maxlength="16" pattern="\d{16}" 
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,16);" 
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" >
                         </div>
                         <div class="mb-4 flex space-x-4">
                             <div>
                                 <label for="fecha-expiracion" class="block text-sm font-medium text-gray-700">Fecha de expiración</label>
-                                <input type="text" id="fecha-expiracion" name="fecha_expiracion" placeholder="MM/AA" 
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                <input type="text" id="fecha-expiracion" name="fecha_expiracion" maxlength="5" pattern="^(0[1-9]|1[0-2])\/\d{2}$"
+                                    oninput="this.value = this.value.replace(/[^0-9\/]/g, '').slice(0,5);" 
+                                    placeholder="MM/AA"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" >
                             </div>
                             <div>
                                 <label for="cvv" class="block text-sm font-medium text-gray-700">CVV</label>
-                                <input type="text" id="cvv" name="cvv" maxlength="3" 
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                <input type="text" id="cvv" name="cvv" maxlength="3" pattern="\d{3}" 
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,3);" 
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" >
                             </div>
                         </div>
                         <div class="flex justify-end space-x-4">

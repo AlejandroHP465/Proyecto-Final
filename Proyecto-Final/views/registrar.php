@@ -45,33 +45,33 @@ session_write_close();
                 <input type="text" id="nombre" name="nombre" 
                     value="<?php echo htmlspecialchars($old['nombre'] ?? ''); ?>"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
-                    aria-label="Nombre completo" required>
+                    aria-label="Nombre completo" >
             </div>
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo $textos[$idioma]['correo']; ?>:</label>
                 <input type="email" id="email" name="email" 
                     value="<?php echo htmlspecialchars($old['email'] ?? ''); ?>"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
-                    aria-label="Correo electrónico" required>
+                    aria-label="Correo electrónico" >
             </div>
             <div>
                 <label for="telefono" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo $textos[$idioma]['telefono']; ?>:</label>
                 <input type="text" id="telefono" name="telefono" pattern="[0-9]{9}"
                     value="<?php echo htmlspecialchars($old['telefono'] ?? ''); ?>"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
-                    aria-label="Número de teléfono" placeholder="123456789" required>
+                    aria-label="Número de teléfono" placeholder="123456789" >
             </div>
             <div>
                 <label for="contraseña" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo $textos[$idioma]['contraseña']; ?>:</label>
                 <input type="password" id="contraseña" name="contraseña" minlength="6"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
-                    aria-label="Contraseña" required>
+                    aria-label="Contraseña" >
             </div>
             <div>
                 <label for="confirmar_contraseña" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo $textos[$idioma]['confirmar_contraseña']; ?>:</label>
                 <input type="password" id="confirmar_contraseña" name="confirmar_contraseña" minlength="6"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
-                    aria-label="Confirmar contraseña" required>
+                    aria-label="Confirmar contraseña" >
             </div>
             <button type="submit"
                 class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">

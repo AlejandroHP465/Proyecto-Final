@@ -1,5 +1,4 @@
 <?php
-// filepath: c:\xampp\htdocs\Proyecto-Final\views\eliminar_usuario.php
 session_name("Tienda");
 session_start();
 include '../includes/connect.php';

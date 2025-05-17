@@ -3,7 +3,7 @@ session_name("Tienda");
 session_start();
 
 include '../includes/connect.php';
-include '../models/Usuario.php';  // Asegúrate de que la ruta a Usuario.php es correcta
+include '../models/Usuario.php';  
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Recogemos y saneamos los datos
