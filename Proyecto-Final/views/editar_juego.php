@@ -170,13 +170,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white dark:bg-gray-800 p-8 rounded shadow-md w-full max-w-lg">
-        <h1 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200">Editar Juego</h1>
+<body class="bg-gray-900 min-h-screen flex items-center justify-center">
+    <div class="bg-gray-800 p-8 rounded shadow-md w-full max-w-lg">
+        <h1 class="text-2xl font-bold mb-6 text-gray-200 text-center">Editar Juego</h1>
 
         <!-- Mostrar errores -->
         <?php if (!empty($errores)): ?>
-            <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
+            <div class="bg-red-500 text-white p-4 rounded mb-4">
                 <ul>
                     <?php foreach ($errores as $error): ?>
                         <li><?php echo htmlspecialchars($error); ?></li>
@@ -188,23 +188,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Formulario -->
         <form action="" method="POST" enctype="multipart/form-data" class="space-y-4">
             <div>
-                <label for="nombre" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre del juego</label>
-                <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($juego['nombre']); ?>" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200">
+                <label for="nombre" class="block text-sm font-medium text-gray-300">Nombre del juego</label>
+                <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($juego['nombre']); ?>" class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm bg-gray-700 text-gray-200 focus:ring-blue-500 focus:border-blue-500">
             </div>
 
             <div>
-                <label for="descripcion" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Descripción</label>
-                <textarea id="descripcion" name="descripcion" rows="4" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"><?php echo htmlspecialchars($juego['descripcion']); ?></textarea>
+                <label for="descripcion" class="block text-sm font-medium text-gray-300">Descripción</label>
+                <textarea id="descripcion" name="descripcion" rows="4" class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm bg-gray-700 text-gray-200 focus:ring-blue-500 focus:border-blue-500"><?php echo htmlspecialchars($juego['descripcion']); ?></textarea>
             </div>
 
             <div>
-                <label for="precio" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Precio</label>
-                <input type="number" step="0.01" id="precio" name="precio" value="<?php echo htmlspecialchars($juego['precio']); ?>" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200">
+                <label for="precio" class="block text-sm font-medium text-gray-300">Precio</label>
+                <input type="number" step="0.01" id="precio" name="precio" value="<?php echo htmlspecialchars($juego['precio']); ?>" class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm bg-gray-700 text-gray-200 focus:ring-blue-500 focus:border-blue-500">
             </div>
 
             <div>
-                <label for="generos" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Géneros</label>
-                <select id="generos" name="generos[]" multiple class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200">
+                <label for="generos" class="block text-sm font-medium text-gray-300">Géneros</label>
+                <select id="generos" name="generos[]" multiple class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm bg-gray-700 text-gray-200 focus:ring-blue-500 focus:border-blue-500">
                     <?php foreach ($generos as $genero): ?>
                         <option value="<?php echo $genero['genero_id']; ?>" 
                                 <?php echo in_array($genero['genero_id'], $generos_actuales) ? 'selected' : ''; ?>>
@@ -212,12 +212,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <p class="text-sm text-gray-500 mt-1">Mantén presionado Ctrl  para seleccionar múltiples géneros.</p>
+                <p class="text-sm text-gray-400 mt-1">Mantén presionado Ctrl para seleccionar múltiples géneros.</p>
             </div>
 
             <div>
-                <label for="plataformas" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Plataformas</label>
-                <select id="plataformas" name="plataformas[]" multiple class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200">
+                <label for="plataformas" class="block text-sm font-medium text-gray-300">Plataformas</label>
+                <select id="plataformas" name="plataformas[]" multiple class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm bg-gray-700 text-gray-200 focus:ring-blue-500 focus:border-blue-500">
                     <?php foreach ($plataformas as $plataforma): ?>
                         <option value="<?php echo $plataforma['plataforma_id']; ?>" 
                                 <?php echo in_array($plataforma['plataforma_id'], $plataformas_actuales) ? 'selected' : ''; ?>>
@@ -225,20 +225,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <p class="text-sm text-gray-500 mt-1">Mantén presionado Ctrl  para seleccionar múltiples plataformas.</p>
+                <p class="text-sm text-gray-400 mt-1">Mantén presionado Ctrl para seleccionar múltiples plataformas.</p>
             </div>
 
             <div>
-                <label for="foto" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Imagen actual</label>
+                <label for="foto" class="block text-sm font-medium text-gray-300">Imagen actual</label>
                 <?php if (!empty($juego['foto'])): ?>
                     <img src="<?php echo htmlspecialchars($juego['foto']); ?>" alt="Imagen actual" class="mt-2 w-32 h-32 object-cover rounded">
-                    <p class="text-sm text-gray-500 mt-1">Sube una nueva imagen solo si deseas cambiarla.</p>
+                    <p class="text-sm text-gray-400 mt-1">Sube una nueva imagen solo si deseas cambiarla.</p>
                 <?php endif; ?>
-                <input type="file" id="foto" name="foto" accept="image/*" class="mt-1 block w-full text-gray-700 dark:text-gray-300">
+                <input type="file" id="foto" name="foto" accept="image/*" class="mt-1 block w-full text-gray-200">
             </div>
 
             <div class="flex justify-end space-x-4">
-                <a href="juego_detalle.php?id=<?php echo $id; ?>" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">Cancelar</a>
+                <a href="juego_detalle.php?id=<?php echo $id; ?>" class="bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">Cancelar</a>
                 <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Guardar cambios</button>
             </div>
         </form>

@@ -23,9 +23,9 @@ session_write_close();
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100" id="body">
-    <div class="w-full max-w-md bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
-        <h1 class="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6"><?php echo $textos[$idioma]['titulo']; ?></h1>
+<body class="flex items-center justify-center min-h-screen bg-gray-900" id="body">
+    <div class="w-full max-w-md bg-gray-800 p-8 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold text-center text-gray-200 mb-6"><?php echo $textos[$idioma]['titulo']; ?></h1>
 
         <!-- Mostrar errores si existen -->
         <?php if (!empty($errores)): ?>
@@ -41,36 +41,36 @@ session_write_close();
         <!-- Formulario de registro -->
         <form action="../controllers/usuarios_controller.php" method="POST" class="space-y-6">
             <div>
-                <label for="nombre" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo $textos[$idioma]['nombre']; ?>:</label>
+                <label for="nombre" class="block text-sm font-medium text-gray-300"><?php echo $textos[$idioma]['nombre']; ?>:</label>
                 <input type="text" id="nombre" name="nombre" 
                     value="<?php echo htmlspecialchars($old['nombre'] ?? ''); ?>"
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
+                    class="mt-1 block w-full px-4 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-700 text-gray-200 focus:ring-blue-500 focus:border-blue-500"
                     aria-label="Nombre completo" >
             </div>
             <div>
-                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo $textos[$idioma]['correo']; ?>:</label>
+                <label for="email" class="block text-sm font-medium text-gray-300"><?php echo $textos[$idioma]['correo']; ?>:</label>
                 <input type="email" id="email" name="email" 
                     value="<?php echo htmlspecialchars($old['email'] ?? ''); ?>"
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
+                    class="mt-1 block w-full px-4 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-700 text-gray-200 focus:ring-blue-500 focus:border-blue-500"
                     aria-label="Correo electrónico" >
             </div>
             <div>
-                <label for="telefono" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo $textos[$idioma]['telefono']; ?>:</label>
+                <label for="telefono" class="block text-sm font-medium text-gray-300"><?php echo $textos[$idioma]['telefono']; ?>:</label>
                 <input type="text" id="telefono" name="telefono" pattern="[0-9]{9}"
                     value="<?php echo htmlspecialchars($old['telefono'] ?? ''); ?>"
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
+                    class="mt-1 block w-full px-4 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-700 text-gray-200 focus:ring-blue-500 focus:border-blue-500"
                     aria-label="Número de teléfono" placeholder="123456789" >
             </div>
             <div>
-                <label for="contraseña" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo $textos[$idioma]['contraseña']; ?>:</label>
+                <label for="contraseña" class="block text-sm font-medium text-gray-300"><?php echo $textos[$idioma]['contraseña']; ?>:</label>
                 <input type="password" id="contraseña" name="contraseña" minlength="6"
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
+                    class="mt-1 block w-full px-4 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-700 text-gray-200 focus:ring-blue-500 focus:border-blue-500"
                     aria-label="Contraseña" >
             </div>
             <div>
-                <label for="confirmar_contraseña" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo $textos[$idioma]['confirmar_contraseña']; ?>:</label>
+                <label for="confirmar_contraseña" class="block text-sm font-medium text-gray-300"><?php echo $textos[$idioma]['confirmar_contraseña']; ?>:</label>
                 <input type="password" id="confirmar_contraseña" name="confirmar_contraseña" minlength="6"
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
+                    class="mt-1 block w-full px-4 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-700 text-gray-200 focus:ring-blue-500 focus:border-blue-500"
                     aria-label="Confirmar contraseña" >
             </div>
             <button type="submit"
@@ -80,8 +80,7 @@ session_write_close();
         </form>
 
         <div class="mt-6 text-center">
-            <p class="text-sm text-gray-600 dark:text-gray-400"><?php echo $textos[$idioma]['ya_tienes_cuenta']; ?></p>
-            <a href="iniciar_sesion.php" class="inline-block mt-2 text-blue-600 hover:underline">
+            <a href="index.php" class="inline-block mt-2 text-blue-400 hover:underline">
                 <?php echo $textos[$idioma]['volver']; ?>
             </a>
         </div>
