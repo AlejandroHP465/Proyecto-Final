@@ -63,13 +63,13 @@ session_write_close();
             </div>
             <div>
                 <label for="contraseña" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo $textos[$idioma]['contraseña']; ?>:</label>
-                <input type="password" id="contraseña" name="contraseña" minlength="6"
+                <input type="password" id="contraseña" name="contraseña" minlength="3"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
                     aria-label="Contraseña" >
             </div>
             <div>
                 <label for="confirmar_contraseña" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo $textos[$idioma]['confirmar_contraseña']; ?>:</label>
-                <input type="password" id="confirmar_contraseña" name="confirmar_contraseña" minlength="6"
+                <input type="password" id="confirmar_contraseña" name="confirmar_contraseña" minlength="3"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
                     aria-label="Confirmar contraseña" >
             </div>
