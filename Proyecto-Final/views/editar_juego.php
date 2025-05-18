@@ -212,7 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <p class="text-sm text-gray-500 mt-1">Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples géneros.</p>
+                <p class="text-sm text-gray-500 mt-1">Mantén presionado Ctrl  para seleccionar múltiples géneros.</p>
             </div>
 
             <div>
@@ -225,7 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <p class="text-sm text-gray-500 mt-1">Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples plataformas.</p>
+                <p class="text-sm text-gray-500 mt-1">Mantén presionado Ctrl  para seleccionar múltiples plataformas.</p>
             </div>
 
             <div>

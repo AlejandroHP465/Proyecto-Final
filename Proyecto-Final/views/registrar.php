@@ -23,7 +23,7 @@ session_write_close();
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 <?php echo isset($_COOKIE['darkMode']) && $_COOKIE['darkMode'] === 'true' ? 'dark-mode' : ''; ?>" id="body">
+<body class="bg-gray-100" id="body">
     <div class="w-full max-w-md bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
         <h1 class="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6"><?php echo $textos[$idioma]['titulo']; ?></h1>
 
@@ -63,13 +63,13 @@ session_write_close();
             </div>
             <div>
                 <label for="contraseña" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo $textos[$idioma]['contraseña']; ?>:</label>
-                <input type="password" id="contraseña" name="contraseña" minlength="3"
+                <input type="password" id="contraseña" name="contraseña" minlength="6"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
                     aria-label="Contraseña" >
             </div>
             <div>
                 <label for="confirmar_contraseña" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo $textos[$idioma]['confirmar_contraseña']; ?>:</label>
-                <input type="password" id="confirmar_contraseña" name="confirmar_contraseña" minlength="3"
+                <input type="password" id="confirmar_contraseña" name="confirmar_contraseña" minlength="6"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
                     aria-label="Confirmar contraseña" >
             </div>

@@ -80,13 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cliente_id'])) {
             throw new Exception("Error al eliminar favoritos: " . $e->getMessage());
         }
 
-        try {
-            // Eliminar carrito
-            $stmt = $pdo->prepare('DELETE FROM carrito WHERE cliente_id = :cliente_id');
-            $stmt->execute(['cliente_id' => $clienteId]);
-        } catch (PDOException $e) {
-            throw new Exception("Error al eliminar carrito: " . $e->getMessage());
-        }
 
         try {
             // Finalmente, eliminar al cliente

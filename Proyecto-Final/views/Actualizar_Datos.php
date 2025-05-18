@@ -10,6 +10,8 @@ if (!isset($_SESSION['cliente_id'])) {
     exit;
 }
 
+$mensaje_exito = '';
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $errores = [];
 
@@ -76,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $_SESSION['telefono'] = $telefono;
                 }
 
-                echo '<div class="bg-green-100 text-green-700 p-4 rounded mb-4 text-center">¡Datos actualizados correctamente!</div>';
+                $mensaje_exito = "¡Datos actualizados correctamente!";
             } else {
                 echo '<div class="bg-yellow-100 text-yellow-700 p-4 rounded mb-4 text-center">No se realizaron cambios.</div>';
             }
@@ -144,6 +146,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <a href="index.php" class="text-blue-600 hover:underline">Volver a la página principal</a>
             </p>
         </form>
+
+        <?php if (!empty($mensaje_exito)): ?>
+            <div class="bg-green-100 text-green-700 p-4 rounded mt-6 text-center">
+                <?php echo $mensaje_exito; ?>
+            </div>
+        <?php endif; ?>
     </div>
 </body>
 
