@@ -48,7 +48,20 @@ Este proyecto es una tienda de videojuegos en línea desarrollada como proyecto 
    - Coloca la carpeta del proyecto en el directorio `htdocs` de XAMPP.
 
 4. **Accede a la aplicación:**
-   - Abre tu navegador y navega a `http://localhost/Proyecto-Final/Proyecto-Final/views/index.php`
+
+   - **Desde GitHub (entorno local típico):**
+     1. Clona el repositorio en tu carpeta `htdocs` de XAMPP:
+        ```bash
+        git clone https://github.com/AlejandroHP465/Proyecto-Final.git
+        ```
+     2. Abre tu navegador y entra en:  
+        `http://localhost/Proyecto-Final/Proyecto-Final/views/index.php`
+
+   - **Desde la ruta local :**
+     1. Copia la carpeta del proyecto a:  
+        `C:\xampp\htdocs\PRW_HigueroPazAlejandro\Proyecto-Final\Proyecto-Final`
+     2. Abre tu navegador y entra en:  
+        `http://localhost/PRW_HigueroPazAlejandro/Proyecto-Final/Proyecto-Final/views/index.php`
 
 ---
 
@@ -103,3 +116,4 @@ Proyecto-Final/
 - **Diseño responsive:** Adaptado para dispositivos móviles y escritorio.
 
 ---
+`
